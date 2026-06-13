@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import openpyxl
@@ -569,6 +568,241 @@ PROFESSIONAL_CSS = """
         padding-top: 0.5rem !important;
         margin-top: 0 !important;
     }
+
+    /* ============================================ */
+    /* NEW: ITEM CARD VIEW (mobile-friendly list)    */
+    /* ============================================ */
+    .item-card {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--radius) !important;
+        box-shadow: var(--shadow-sm) !important;
+        padding: 0.9rem 1rem !important;
+        margin-bottom: 0.8rem !important;
+        transition: all 0.25s ease;
+    }
+    .item-card:hover {
+        box-shadow: var(--shadow) !important;
+        transform: translateY(-2px);
+    }
+    .item-card.low-stock-card {
+        border-left: 5px solid var(--danger-color) !important;
+        background: linear-gradient(135deg, var(--bg-card), var(--danger-light)) !important;
+    }
+    .item-card-header {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-bottom: 0.6rem !important;
+        gap: 0.5rem;
+    }
+    .item-card-title {
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+        color: var(--text-primary) !important;
+        line-height: 1.3;
+    }
+    .item-card-grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 0.6rem !important;
+        text-align: center !important;
+    }
+    .item-stat-label {
+        font-size: 0.68rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        color: var(--text-muted) !important;
+        font-weight: 700 !important;
+        margin-bottom: 0.15rem !important;
+    }
+    .item-stat-value {
+        font-size: 1rem !important;
+        font-weight: 800 !important;
+        color: var(--text-primary) !important;
+    }
+    .item-stat-value.danger { color: var(--danger-color) !important; }
+    .item-stat-value.success { color: var(--success-color) !important; }
+    .item-card-footer {
+        font-size: 0.78rem !important;
+        color: var(--text-muted) !important;
+        margin-top: 0.6rem !important;
+        padding-top: 0.5rem !important;
+        border-top: 1px dashed var(--border-color) !important;
+        text-align: right !important;
+    }
+
+    /* ============================================ */
+    /* NEW: ALERT BANNER (low stock notifications)   */
+    /* ============================================ */
+    .alert-banner {
+        background: linear-gradient(135deg, #fff7ed, #fee2e2) !important;
+        border: 2px solid var(--danger-color) !important;
+        border-radius: var(--radius) !important;
+        padding: 1rem 1.2rem !important;
+        margin: 1rem 0 !important;
+        box-shadow: var(--shadow) !important;
+        animation: pulse-border 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse-border {
+        0%, 100% { border-color: var(--danger-color); }
+        50% { border-color: #fca5a5; }
+    }
+    .alert-banner-title {
+        font-weight: 800 !important;
+        font-size: 1rem !important;
+        color: var(--danger-color) !important;
+        margin-bottom: 0.4rem !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.4rem !important;
+    }
+    .alert-chip {
+        display: inline-block !important;
+        background: var(--bg-card) !important;
+        border: 1px solid var(--danger-color) !important;
+        color: var(--danger-color) !important;
+        font-weight: 700 !important;
+        font-size: 0.8rem !important;
+        padding: 0.2rem 0.65rem !important;
+        border-radius: 999px !important;
+        margin: 0.2rem 0.25rem 0 0 !important;
+    }
+
+    /* ============================================ */
+    /* NEW: QUICK ADJUST +/- BUTTONS                 */
+    /* ============================================ */
+    .quick-adjust-row .stButton button {
+        height: 38px !important;
+        min-height: 38px !important;
+        font-size: 0.95rem !important;
+        font-weight: 800 !important;
+        padding: 0.2rem !important;
+    }
+
+    /* ============================================ */
+    /* NEW: ANALYTICS / INSIGHT CARDS                */
+    /* ============================================ */
+    .insight-card {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border-color) !important;
+        border-radius: var(--radius) !important;
+        box-shadow: var(--shadow) !important;
+        padding: 1rem 1.2rem !important;
+        margin-bottom: 1rem !important;
+    }
+    .insight-title {
+        font-weight: 800 !important;
+        font-size: 1rem !important;
+        color: var(--text-primary) !important;
+        margin-bottom: 0.6rem !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.4rem !important;
+    }
+    .activity-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0.5rem 0.2rem !important;
+        border-bottom: 1px solid var(--border-light) !important;
+        font-size: 0.88rem !important;
+    }
+    .activity-row:last-child { border-bottom: none !important; }
+    .activity-badge {
+        font-size: 0.7rem !important;
+        font-weight: 800 !important;
+        padding: 0.15rem 0.5rem !important;
+        border-radius: 6px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+    }
+    .activity-badge.sale { background: var(--success-light) !important; color: var(--success-color) !important; }
+    .activity-badge.stock { background: var(--info-light) !important; color: var(--info-color) !important; }
+
+    /* ============================================ */
+    /* MOBILE RESPONSIVE OVERHAUL (<= 768px)         */
+    /* ============================================ */
+    @media (max-width: 768px) {
+        .main-header {
+            font-size: 1.35rem !important;
+            padding: 0.9rem 0.5rem !important;
+            border-radius: 0 0 10px 10px;
+        }
+        .sub-header {
+            font-size: 1rem !important;
+            padding: 0.6rem 0.9rem !important;
+        }
+        /* Stack metric cards 2 per row instead of squeezing 5 */
+        div[data-testid="stHorizontalBlock"] {
+            flex-wrap: wrap !important;
+            gap: 0.5rem !important;
+        }
+        div[data-testid="stHorizontalBlock"] > div[data-testid="column"] {
+            min-width: calc(50% - 0.5rem) !important;
+            flex: 1 1 calc(50% - 0.5rem) !important;
+        }
+        .metric-card {
+            padding: 0.7rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        .metric-value {
+            font-size: 1.3rem !important;
+        }
+        .metric-label {
+            font-size: 0.62rem !important;
+            letter-spacing: 0.5px !important;
+        }
+        /* Action buttons full width, stacked */
+        .action-button {
+            font-size: 0.85rem !important;
+            min-height: 44px !important;
+            padding: 0.5rem 0.6rem !important;
+        }
+        .stButton button {
+            font-size: 0.85rem !important;
+            padding: 0.45rem 0.6rem !important;
+            height: auto !important;
+            min-height: 42px !important;
+            white-space: normal !important;
+        }
+        /* Filter section: single column stacking */
+        .filter-section {
+            padding: 0.9rem !important;
+        }
+        .filter-grid {
+            grid-template-columns: 1fr !important;
+        }
+        /* Item card grid: 2 columns on mobile */
+        .item-card-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.5rem !important;
+        }
+        .item-card-title {
+            font-size: 0.95rem !important;
+        }
+        /* Forms: shrink padding */
+        .modern-form, .edit-form-container, .delete-confirmation {
+            padding: 1rem !important;
+        }
+        /* Selectbox text doesn't need huge width on mobile */
+        .stSelectbox [data-baseweb="select"] > div {
+            min-width: 0 !important;
+        }
+        .stSelectbox [data-baseweb="select"] span {
+            max-width: 100% !important;
+        }
+        .welcome-message {
+            padding: 1.5rem 1rem !important;
+        }
+        .welcome-message > div {
+            grid-template-columns: 1fr !important;
+        }
+        .copyright-footer {
+            font-size: 0.78rem !important;
+            padding: 1rem !important;
+        }
+    }
 </style>
 """
 
@@ -744,6 +978,49 @@ class InventoryDataManager:
 def export_group_to_csv(group_data, group_name):
     """Export group data to CSV format"""
     return group_data.to_csv(index=False)
+
+# === EXCEL EXPORT (multi-sheet workbook) ===
+def export_to_excel(remaining_df, summary_df=None):
+    """Export inventory (and optional summary) to a styled Excel workbook in memory"""
+    buffer = io.BytesIO()
+    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+        remaining_df.to_excel(writer, index=False, sheet_name='Inventory')
+        if summary_df is not None and not summary_df.empty:
+            summary_df.to_excel(writer, index=False, sheet_name='Group Summary')
+    buffer.seek(0)
+    return buffer.getvalue()
+
+# === QUICK STOCK ADJUSTMENT HELPERS (one-tap mobile actions) ===
+def quick_add_stock(inventory_manager, group, item_name, purchase_price, mrp):
+    """Instantly add 1 unit of stock for an existing item (one-tap restock)"""
+    stock_df, sales_df, metadata = inventory_manager.load_inventory_data()
+    new_row = pd.DataFrame(
+        [[group, item_name, 1, mrp, purchase_price, datetime.now().date()]],
+        columns=inventory_manager.REQUIRED_COLUMNS_STOCK
+    )
+    updated_stock_df = pd.concat([stock_df, new_row], ignore_index=True)
+    if inventory_manager.save_inventory_data(updated_stock_df, sales_df):
+        st.toast(f"📦 +1 stock added for {item_name}", icon="✅")
+        time.sleep(0.3)
+        st.rerun()
+
+def quick_record_sale(inventory_manager, group, item_name, purchase_price, mrp):
+    """Instantly record a sale of 1 unit at MRP for an existing item (one-tap sale)"""
+    stock_df, sales_df, metadata = inventory_manager.load_inventory_data()
+    new_sale = pd.DataFrame(
+        [[group, item_name, 1, mrp, purchase_price, datetime.now().date()]],
+        columns=inventory_manager.REQUIRED_COLUMNS_SALES
+    )
+    updated_sales_df = pd.concat([sales_df, new_sale], ignore_index=True)
+
+    stock_mask = (stock_df['Group'] == group) & (stock_df['Item Name'] == item_name)
+    if not stock_df[stock_mask].empty:
+        stock_df.loc[stock_mask, 'Date'] = datetime.now().date()
+
+    if inventory_manager.save_inventory_data(stock_df, updated_sales_df):
+        st.toast(f"💰 Sold 1 × {item_name} @ ₹{mrp:.0f}", icon="✅")
+        time.sleep(0.3)
+        st.rerun()
 
 # === PROFESSIONAL LOGIN PAGE ===
 def show_login_page(user_manager):
@@ -1106,23 +1383,9 @@ def show_total_inventory(inventory_manager):
                 )
     
     st.markdown("---")
-    col1, col2 = st.columns(2)
-    with col1:
-        all_csv_data = remaining_df.to_csv(index=False)
-        st.download_button(
-            label="📥 Download All Data (CSV)",
-            data=all_csv_data,
-            file_name=f"inventory_{datetime.now().strftime('%Y%m%d')}.csv",
-            mime="text/csv",
-            use_container_width=True
-        )
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Show summary statistics
-    st.markdown('<div class="table-container">', unsafe_allow_html=True)
-    st.markdown('<div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">📈 Inventory Summary by Group</div>', unsafe_allow_html=True)
-    
+
+    # Pre-compute group summary (used for Excel export and the table below)
+    summary = pd.DataFrame()
     if not remaining_df.empty:
         summary = remaining_df.groupby('Group').agg({
             'Item Name': 'count',
@@ -1134,8 +1397,35 @@ def show_total_inventory(inventory_manager):
             'Item Name': 'Items',
             'Low Stock': 'Low Stock'
         }).reset_index()
-        
         summary = summary.sort_values('Items', ascending=False)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        all_csv_data = remaining_df.to_csv(index=False)
+        st.download_button(
+            label="📥 Download All Data (CSV)",
+            data=all_csv_data,
+            file_name=f"inventory_{datetime.now().strftime('%Y%m%d')}.csv",
+            mime="text/csv",
+            use_container_width=True
+        )
+    with col2:
+        excel_data = export_to_excel(remaining_df, summary)
+        st.download_button(
+            label="📊 Download All Data (Excel)",
+            data=excel_data,
+            file_name=f"inventory_{datetime.now().strftime('%Y%m%d')}.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            use_container_width=True
+        )
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Show summary statistics
+    st.markdown('<div class="table-container">', unsafe_allow_html=True)
+    st.markdown('<div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">📈 Inventory Summary by Group</div>', unsafe_allow_html=True)
+    
+    if not summary.empty:
         st.dataframe(summary, use_container_width=True, hide_index=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
@@ -1320,80 +1610,67 @@ def show_inventory_overview(inventory_manager):
     if display_df.empty:
         st.info("📭 No items match your filters")
         return
-    
-    # Display inventory table
-    st.markdown('<div class="table-container">', unsafe_allow_html=True)
-    
-    # Table header
-    col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([2.8, 1, 1, 1, 1.2, 1.2, 1.2, 1.3, 1.2])
-    with col1:
-        st.markdown("**ITEM NAME**")
-    with col2:
-        st.markdown("**GROUP**")
-    with col3:
-        st.markdown("**STOCK**")
-    with col4:
 
-        st.markdown("**SOLD**")
-    with col5:
-        st.markdown("**REMAIN**")
-    with col6:
-        st.markdown("**COST**")
-    with col7:
-        st.markdown("**MRP**")
-    with col8:
-        st.markdown("**UPDATED**")
-    with col9:
-        st.markdown("**ACTIONS**")
-    
-    # Display each item
+    st.caption(f"📊 Showing {len(display_df):,} of {len(remaining_df):,} items")
+
+    # Display inventory as mobile-friendly cards
     for idx, row in display_df.iterrows():
-        col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns([2.8, 1, 1, 1, 1.2, 1.2, 1.2, 1.3, 1.2])
-        
-        with col1:
-            st.markdown(f'<div style="font-weight: 600; color: var(--text-primary);">{row["Item Name"]}</div>', unsafe_allow_html=True)
-        
-        with col2:
-            # FIXED: Clean group badge without blue background
-            st.markdown(f'<span class="group-badge">{row["Group"]}</span>', unsafe_allow_html=True)
-        
-        with col3:
-            st.markdown(f'<div style="font-weight: 700; color: var(--text-primary);">{int(row["Quantity"])}</div>', unsafe_allow_html=True)
-        
-        with col4:
-            st.write(f"{int(row['Sold Quantity'])}")
-        
-        with col5:
-            remaining = int(row['Remaining'])
-            if remaining <= 1:
-                st.markdown(f'<span class="low-stock">{remaining}</span>', unsafe_allow_html=True)
-            else:
-                st.markdown(f'<div style="font-weight: 700; color: var(--success-color);">{remaining}</div>', unsafe_allow_html=True)
-        
-        with col6:
-            st.markdown(f'<div style="font-weight: 600;">₹{row["Purchase Price"]:.0f}</div>', unsafe_allow_html=True)
-        
-        with col7:
-            st.markdown(f'<div style="font-weight: 600;">₹{row["MRP"]:.0f}</div>', unsafe_allow_html=True)
-        
-        with col8:
-            date_str = row['Date'].strftime('%d-%m-%Y') if pd.notna(row['Date']) else 'N/A'
-            st.markdown(f'<div style="font-size: 0.85rem; color: var(--text-secondary);">{date_str}</div>', unsafe_allow_html=True)
-        
-        with col9:
-            btn_col1, btn_col2 = st.columns(2)
-            with btn_col1:
-                if st.button("✏️", key=f"edit_{row['Group']}_{row['Item Name']}_{idx}", 
-                           help="Edit Item", use_container_width=True):
-                    st.session_state.editing_item = (row['Group'], row['Item Name'])
-            with btn_col2:
-                if st.button("🗑️", key=f"delete_{row['Group']}_{row['Item Name']}_{idx}", 
-                           help="Delete Item", use_container_width=True):
-                    st.session_state.deleting_item = (row['Group'], row['Item Name'])
+        remaining = int(row['Remaining'])
+        is_low = remaining <= 1
+        date_str = row['Date'].strftime('%d-%m-%Y') if pd.notna(row['Date']) else 'N/A'
+        remaining_class = "danger" if is_low else "success"
+        card_class = "item-card low-stock-card" if is_low else "item-card"
+        footer_extra = " &nbsp;•&nbsp; ⚠️ <strong>Low Stock!</strong>" if is_low else ""
 
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-    
+        st.markdown(f"""
+            <div class="{card_class}">
+                <div class="item-card-header">
+                    <span class="item-card-title">{row['Item Name']}</span>
+                    <span class="group-badge">{row['Group']}</span>
+                </div>
+                <div class="item-card-grid">
+                    <div>
+                        <div class="item-stat-label">Stock</div>
+                        <div class="item-stat-value">{int(row['Quantity'])}</div>
+                    </div>
+                    <div>
+                        <div class="item-stat-label">Sold</div>
+                        <div class="item-stat-value">{int(row['Sold Quantity'])}</div>
+                    </div>
+                    <div>
+                        <div class="item-stat-label">Remaining</div>
+                        <div class="item-stat-value {remaining_class}">{remaining}</div>
+                    </div>
+                    <div>
+                        <div class="item-stat-label">Cost / MRP</div>
+                        <div class="item-stat-value">₹{row['Purchase Price']:.0f} / ₹{row['MRP']:.0f}</div>
+                    </div>
+                </div>
+                <div class="item-card-footer">🕒 Updated {date_str}{footer_extra}</div>
+            </div>
+        """, unsafe_allow_html=True)
+
+        btn_col1, btn_col2, btn_col3, btn_col4 = st.columns(4)
+        with btn_col1:
+            if st.button("➕ Stock", key=f"qadd_{row['Group']}_{row['Item Name']}_{idx}",
+                       help="One-tap: add 1 unit to stock", use_container_width=True):
+                quick_add_stock(inventory_manager, row['Group'], row['Item Name'],
+                                row['Purchase Price'], row['MRP'])
+        with btn_col2:
+            if st.button("➖ Sale", key=f"qsale_{row['Group']}_{row['Item Name']}_{idx}",
+                       help="One-tap: record a sale of 1 unit at MRP", use_container_width=True,
+                       disabled=(remaining <= 0)):
+                quick_record_sale(inventory_manager, row['Group'], row['Item Name'],
+                                  row['Purchase Price'], row['MRP'])
+        with btn_col3:
+            if st.button("✏️ Edit", key=f"edit_{row['Group']}_{row['Item Name']}_{idx}",
+                       help="Edit Item", use_container_width=True):
+                st.session_state.editing_item = (row['Group'], row['Item Name'])
+        with btn_col4:
+            if st.button("🗑️ Delete", key=f"delete_{row['Group']}_{row['Item Name']}_{idx}",
+                       help="Delete Item", use_container_width=True):
+                st.session_state.deleting_item = (row['Group'], row['Item Name'])
+
     # Summary statistics
     total_items = len(display_df)
     total_remaining = display_df['Remaining'].sum()
@@ -1423,17 +1700,20 @@ def show_welcome_message():
                     <ul style="color: var(--text-secondary); font-size: 0.95rem; margin: 0; padding-left: 1.2rem;">
                         <li>Add new stock items</li>
                         <li>Record sales transactions</li>
+                        <li>One-tap restock & quick sale buttons</li>
                         <li>View inventory overview</li>
-                        <li>Export inventory data</li>
+                        <li>Export inventory data (CSV & Excel)</li>
                     </ul>
                 </div>
                 <div style="background: var(--bg-secondary); padding: 1.2rem; border-radius: 8px; border: 2px solid var(--border-color);">
                     <h4 style="color: var(--text-primary); margin-bottom: 0.8rem; font-size: 1.1rem; font-weight: 700;">📊 Dashboard Features</h4>
                     <ul style="color: var(--text-secondary); font-size: 0.95rem; margin: 0; padding-left: 1.2rem;">
                         <li>Real-time stock tracking</li>
-                        <li>Sales analytics</li>
+                        <li>Low stock alerts</li>
+                        <li>Revenue & profit trend charts</li>
+                        <li>Top-selling items & recent activity</li>
                         <li>Group-wise management</li>
-                        <li>Secure data storage</li>
+                        <li>Secure cloud data storage</li>
                     </ul>
                 </div>
             </div>
@@ -1442,6 +1722,92 @@ def show_welcome_message():
             </p>
         </div>
     """, unsafe_allow_html=True)
+
+# === NEW: ANALYTICS & INSIGHTS DASHBOARD ===
+def show_analytics(inventory_manager):
+    """Show charts for sales trends, top sellers, stock distribution and recent activity"""
+    st.markdown('<div class="sub-header">📈 Analytics & Insights</div>', unsafe_allow_html=True)
+
+    stock_df, sales_df, metadata = inventory_manager.load_inventory_data()
+
+    if stock_df.empty and sales_df.empty:
+        st.info("📭 No data available yet. Add some stock or record a sale to see analytics here.")
+        return
+
+    # --- Sales Trend (Revenue over time) ---
+    st.markdown('<div class="insight-card">', unsafe_allow_html=True)
+    st.markdown('<div class="insight-title">📈 Revenue Trend</div>', unsafe_allow_html=True)
+    if not sales_df.empty:
+        sales_trend = sales_df.copy()
+        sales_trend['Revenue'] = sales_trend['Sold Quantity'] * sales_trend['Sale Price']
+        sales_trend['Profit'] = sales_trend['Sold Quantity'] * (sales_trend['Sale Price'] - sales_trend['Purchase Price'])
+        trend = sales_trend.groupby('Date')[['Revenue', 'Profit']].sum().reset_index()
+        trend = trend.sort_values('Date').set_index('Date')
+        st.line_chart(trend, use_container_width=True)
+        st.caption("Daily revenue (₹) and profit (₹) from recorded sales")
+    else:
+        st.info("No sales recorded yet — record a sale to see your revenue trend.")
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # --- Top Sellers & Stock Value by Group ---
+    chart_col1, chart_col2 = st.columns(2)
+
+    with chart_col1:
+        st.markdown('<div class="insight-card">', unsafe_allow_html=True)
+        st.markdown('<div class="insight-title">🏆 Top Selling Items</div>', unsafe_allow_html=True)
+        if not sales_df.empty:
+            top_items = sales_df.groupby('Item Name')['Sold Quantity'].sum().sort_values(ascending=False).head(8)
+            st.bar_chart(top_items, use_container_width=True)
+        else:
+            st.info("No sales data yet.")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with chart_col2:
+        st.markdown('<div class="insight-card">', unsafe_allow_html=True)
+        st.markdown('<div class="insight-title">📦 Stock Value by Group</div>', unsafe_allow_html=True)
+        if not stock_df.empty:
+            stock_value = stock_df.copy()
+            stock_value['Value'] = stock_value['Quantity'] * stock_value['Purchase Price']
+            group_value = stock_value.groupby('Group')['Value'].sum().sort_values(ascending=False)
+            st.bar_chart(group_value, use_container_width=True)
+        else:
+            st.info("No stock data yet.")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # --- Recent Activity Feed ---
+    st.markdown('<div class="insight-card">', unsafe_allow_html=True)
+    st.markdown('<div class="insight-title">🕒 Recent Activity</div>', unsafe_allow_html=True)
+
+    activities = []
+    for _, r in stock_df.iterrows():
+        activities.append({
+            'Date': r['Date'],
+            'Type': 'stock',
+            'Text': f"➕ Added {int(r['Quantity'])} × {r['Item Name']} <span class=\"group-badge\">{r['Group']}</span>"
+        })
+    for _, r in sales_df.iterrows():
+        activities.append({
+            'Date': r['Date'],
+            'Type': 'sale',
+            'Text': f"💰 Sold {int(r['Sold Quantity'])} × {r['Item Name']} @ ₹{r['Sale Price']:.0f}"
+        })
+
+    if activities:
+        activity_df = pd.DataFrame(activities)
+        activity_df = activity_df.sort_values('Date', ascending=False).head(12)
+        for _, a in activity_df.iterrows():
+            badge_class = "sale" if a['Type'] == 'sale' else "stock"
+            badge_text = "SALE" if a['Type'] == 'sale' else "STOCK"
+            date_str = a['Date'].strftime('%d-%m-%Y') if pd.notna(a['Date']) else 'N/A'
+            st.markdown(f"""
+                <div class="activity-row">
+                    <span>{a['Text']}</span>
+                    <span><span class="activity-badge {badge_class}">{badge_text}</span> &nbsp; {date_str}</span>
+                </div>
+            """, unsafe_allow_html=True)
+    else:
+        st.info("No activity recorded yet.")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # === PROFESSIONAL MAIN APPLICATION ===
 def show_main_application(inventory_manager, user_manager):
@@ -1560,6 +1926,23 @@ def show_main_application(inventory_manager, user_manager):
     
     # Dashboard Metrics
     show_dashboard_metrics(stock_df, sales_df, remaining_df)
+
+    # === NEW: LOW STOCK ALERT BANNER ===
+    if not remaining_df.empty:
+        low_stock_items = remaining_df[remaining_df['Remaining'] <= 1].sort_values('Remaining')
+        if not low_stock_items.empty:
+            chips = "".join(
+                f'<span class="alert-chip">{r["Item Name"]} ({int(r["Remaining"])} left)</span>'
+                for _, r in low_stock_items.head(15).iterrows()
+            )
+            more_count = len(low_stock_items) - 15
+            more_text = f' <span class="alert-chip">+{more_count} more</span>' if more_count > 0 else ""
+            st.markdown(f"""
+                <div class="alert-banner">
+                    <div class="alert-banner-title">⚠️ Low Stock Alert — {len(low_stock_items)} item(s) need restocking</div>
+                    <div>{chips}{more_text}</div>
+                </div>
+            """, unsafe_allow_html=True)
     
     # Show Financial Summary if enabled
     if st.session_state.get('show_financial_summary', True):
@@ -1620,7 +2003,7 @@ def show_main_application(inventory_manager, user_manager):
     # Create a container for action buttons
     with st.container():
 
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3, col4, col5 = st.columns(5)
         
         with col1:
             button_type = "primary" if st.session_state.get('show_add_stock') else "secondary"
@@ -1634,6 +2017,7 @@ def show_main_application(inventory_manager, user_manager):
                     st.session_state.show_record_sale = False
                     st.session_state.show_inventory_overview = False
                     st.session_state.show_total_inventory = False
+                    st.session_state.show_analytics = False
                 st.rerun()
         
         with col2:
@@ -1648,6 +2032,7 @@ def show_main_application(inventory_manager, user_manager):
                     st.session_state.show_add_stock = False
                     st.session_state.show_inventory_overview = False
                     st.session_state.show_total_inventory = False
+                    st.session_state.show_analytics = False
                 st.rerun()
         
         with col3:
@@ -1662,6 +2047,7 @@ def show_main_application(inventory_manager, user_manager):
                     st.session_state.show_add_stock = False
                     st.session_state.show_record_sale = False
                     st.session_state.show_total_inventory = False
+                    st.session_state.show_analytics = False
                 st.rerun()
         
         with col4:
@@ -1676,6 +2062,22 @@ def show_main_application(inventory_manager, user_manager):
                     st.session_state.show_add_stock = False
                     st.session_state.show_record_sale = False
                     st.session_state.show_inventory_overview = False
+                    st.session_state.show_analytics = False
+                st.rerun()
+
+        with col5:
+            button_type = "primary" if st.session_state.get('show_analytics') else "secondary"
+            button_label = "📈 ANALYTICS"
+            if st.button(button_label,
+                        use_container_width=True,
+                        type=button_type,
+                        key="analytics_main"):
+                st.session_state.show_analytics = not st.session_state.get('show_analytics', False)
+                if st.session_state.show_analytics:
+                    st.session_state.show_add_stock = False
+                    st.session_state.show_record_sale = False
+                    st.session_state.show_inventory_overview = False
+                    st.session_state.show_total_inventory = False
                 st.rerun()
     
     # Add Stock Form
@@ -1796,6 +2198,10 @@ def show_main_application(inventory_manager, user_manager):
     elif st.session_state.get('show_total_inventory'):
         show_total_inventory(inventory_manager)
     
+    # Analytics & Insights View
+    elif st.session_state.get('show_analytics'):
+        show_analytics(inventory_manager)
+    
     # Welcome Message
     else:
         show_welcome_message()
@@ -1807,7 +2213,7 @@ def show_main_application(inventory_manager, user_manager):
         <div class="copyright-footer">
             <p>Prepared with ❤️ for <strong style="color: var(--primary-color);">N.P. SPARES</strong> by Rohit</p>
             <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.5rem;">
-                © {current_year} N.P. SPARES | Professional Inventory Management System v2.3
+                © {current_year} N.P. SPARES | Professional Inventory Management System v3.0
             </p>
         </div>
     """, unsafe_allow_html=True)
@@ -1838,6 +2244,7 @@ def main():
         'show_record_sale': False,
         'show_inventory_overview': False,
         'show_total_inventory': False,
+        'show_analytics': False,
         'show_financial_summary': True,
         # Filter states for retention
         'selected_group_filter': "All Groups",
