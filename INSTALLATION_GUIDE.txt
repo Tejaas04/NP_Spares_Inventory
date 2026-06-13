@@ -1,0 +1,19 @@
+N.P. REFRIGERATION - INSTALLATION GUIDE
+================================================
+
+QUICK START:
+1. Double-click 'run_app.bat'
+2. Wait for installation (first time only)
+3. Application opens in browser
+4. Login: admin / admin123
+
+IMPORTANT: 
+- This is FRESH installation with NO data
+- You need to add your inventory items manually
+- All data will be stored securely on your computer
+
+LOGIN CREDENTIALS:
+Username: admin
+Password: admin123
+
+SUPPORT: [Your Contact Information]
